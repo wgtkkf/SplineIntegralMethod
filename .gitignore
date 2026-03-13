@@ -205,3 +205,10 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+# --- MY CUSTOM RULE ---
+# Ignore everything else in the folder
+*
+
+# But allow these specific files
+!spintegral_object.py
+!.gitignore
