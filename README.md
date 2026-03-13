@@ -1,2 +1,2 @@
 # SplineIntegralMethod
-Double integral calculation by using third order spline interpolation
+Integral calculation with the third order spline interpolation
