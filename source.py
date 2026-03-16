@@ -160,15 +160,16 @@ class SplineIntegral:
             gdata.columns = ["gap"]
             self.vg[j] = gdata.iat[j,0] # 0th line
 
-            data = pd.read_csv(self.file_path_flux + str("/flux") + str(j) + ".txt", sep=" ", header=None) # change file name here, add tab:\t for CHPC
-            data.columns = ["omega", "prop", "evan", "prop + evan"]            
+            #data = pd.read_csv(self.file_path_flux + str("/flux") + str(j) + ".txt", sep=" ", header=None) # change file name here, add tab:\t for CHPC
+            data = pd.read_csv(self.file_path_flux / f"flux{j}.txt", sep=" ", header=None)
+            data.columns = ["omega", "prop", "evan", "prop + evan"]                                
 
             # input data into tables
             for i in range(0, self.dpoint):                
                 # matrix operation
                 self.sx[i] = data.iat[i, 0]
-                self.fx[i] = data.iat[i, 3]            
-            
+                self.fx[i] = data.iat[i, 3]                                
+
             self.matrix_operation() # x line, fx line, 1:prop, 2:evan, 3:total
 
             # integral calculation
@@ -194,10 +195,11 @@ def main():
     # main start
 
     ## path input
-    flux_file_path = "../fe/flux/au/flux0.txt"
-    flux_path = "../fe/flux/au"
-    gap_file_path = "../fe/flux/spline/gap.txt"    
-    ##
+    working_path = Path("../fe/flux")
+    flux_file_path = working_path  / "au/flux0.txt"
+    flux_path = working_path / "au"
+    gap_file_path = working_path / "spline" / "gap.txt"    
+    ##    
 
     start = TimeCounter(time.time())
     msg = Comments('Calculation started.', 'Calculation completed.')    
